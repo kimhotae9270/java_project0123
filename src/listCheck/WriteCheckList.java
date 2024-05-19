@@ -1,5 +1,6 @@
 package listCheck;
 import java.awt.BorderLayout;
+import UserInfo.NowLoginUser;
 import java.awt.Button;
 import java.awt.Checkbox;
 import java.awt.Frame;
@@ -10,6 +11,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
+
+import UserAction.CheckInfo;
 public class WriteCheckList {
 	Frame writeCheckList = new Frame("할일 추가하기");
 	Panel checklistPanel;
@@ -48,10 +54,15 @@ public class WriteCheckList {
         writeCheckList.setVisible(true);
 	}
 	public void writeFile(String text) {
-		 String[] texts = text.replace("\\n", "").split(" ");
-	        for (int i = 0; i < texts.length; i++) {
-	            System.out.println(texts[i]);
-	        }
+		String path = CheckInfo.getFolderPath()+"/"+NowLoginUser.getID();
+		File folder = new File(path);
+		try(FileWriter fw = new FileWriter(path+"/schedule", true)){
+			
+		}catch(IOException e){
+			System.out.println("업로드 실패");
+		}
+		
+	    
 
 	}
 }

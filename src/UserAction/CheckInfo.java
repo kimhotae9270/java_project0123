@@ -8,8 +8,8 @@ import java.io.IOException;
 public class CheckInfo {
 	private boolean isIDtrue = false;
 	private boolean Allclear = false;
-	private String folderPath = "C:\\schedule_system\\User";
-	private String fileIDPath = folderPath+"\\UserID.txt";
+	private static String folderPath = "C:\\schedule_system\\User";
+	private static String fileIDPath = folderPath+"\\UserID.txt";
 	private String filePWPath = folderPath+"\\UserPW.txt";
 	private File folder = new File(folderPath);
 	CheckInfo(){}
@@ -39,10 +39,13 @@ public class CheckInfo {
             System.out.println("회원가입 먼저 진행해 주세요!");
         }}
 	}
-	boolean getAllclear() {
+	public boolean getAllclear() {
 		return Allclear;
 	}
-	boolean getIsIDtrue() {
+	public boolean getIsIDtrue() {
 		return isIDtrue;
+	}
+	public static String getFolderPath() {
+		return folderPath;
 	}
 }

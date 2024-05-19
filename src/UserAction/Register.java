@@ -34,11 +34,11 @@ public class Register implements PopUp{
 				folder = new File(folderPath+"\\"+ID);
 				folder.mkdir();
 			}catch(IOException e) {
-				System.out.println("실패!");
+				herePopUp("회원가입에 실패했습니다."+e);
 			}
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
-			System.out.println("회원가입에 실패 했습니다 "+e);
+			herePopUp("회원가입에 실패했습니다."+e);
 		}
 	}}
 	

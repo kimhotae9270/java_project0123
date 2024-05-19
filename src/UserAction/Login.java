@@ -1,4 +1,5 @@
 package UserAction;
+import UserInfo.NowLoginUser;
 import java.awt.*;
 import java.awt.event.*;
 import java.io.File;
@@ -59,12 +60,7 @@ public class Login implements PopUp{
 			public void actionPerformed(ActionEvent e) {
 				CheckInfo ci = new CheckInfo(idField.getText(),pwField.getText());
 				if(ci.getAllclear()) {
-					try(FileWriter f = new FileWriter("C:\\schedule_system\\nowLogined.txt")){
-						f.write(idField.getText());
-					}
-					catch(IOException e1){
-						System.out.println("로그인에 실패");
-					}
+					NowLoginUser.setID(idField.getText(),pwField.getText());
 					new UpdateCalendar();
 					frame.dispose();
 				}
