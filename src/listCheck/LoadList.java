@@ -13,7 +13,7 @@ public class LoadList {
 	Panel checklistPanel = new Panel();
     
     Button addButton = new Button("추가");
-
+    LoadList(){};
     public LoadList(int month, int finalDay) {
         checklistPanel.setLayout(new GridLayout(0, 1)); // 체크박스를 세로로 배치하기 위해 GridLayout 사용
         
