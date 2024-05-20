@@ -1,6 +1,15 @@
 package updateCalendar;
 
+import UserAction.CheckInfo;
+import UserInfo.NowLoginUser;
+
+import java.io.File;
+
 public abstract class RemoveSca {
-	//여기에 하루를 리무브 하는 메소드 생성 후 
-	//more del 메소드를 추상화
+    String path = CheckInfo.getFolderPath() + "/" + NowLoginUser.getID() + "/schedule/" + UpdateCalendar.getCurrentYear() + "_" + UpdateCalendar.getCurrentMonth() + "_" + UpdateCalendar.getCurrentDay() + ".txt";;
+   File file;
+    public RemoveSca(){
+        file = new File(path);
+    }
+    abstract void removeSca();
 }

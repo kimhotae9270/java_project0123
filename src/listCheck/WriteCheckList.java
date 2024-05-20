@@ -1,12 +1,9 @@
 package listCheck;
-import java.awt.BorderLayout;
+import java.awt.*;
+
+import UserAction.PopUp;
 import UserInfo.NowLoginUser;
-import java.awt.Button;
-import java.awt.Checkbox;
-import java.awt.Frame;
-import java.awt.GridLayout;
-import java.awt.Panel;
-import java.awt.TextArea;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
@@ -16,11 +13,15 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import UserAction.CheckInfo;
-public class WriteCheckList {
+import updateCalendar.UpdateCalendar;
+
+public class WriteCheckList implements PopUp {
 	Frame writeCheckList = new Frame("할일 추가하기");
 	Panel checklistPanel;
 	Button addButton;
-	public WriteCheckList() {
+	int month;
+	int year;
+	public WriteCheckList(Runnable callback) {
 		writeCheckList.setSize(500,150);
 		writeCheckList.setLayout(new BorderLayout());
 		TextArea textArea = new TextArea("", 5, 20, TextArea.SCROLLBARS_VERTICAL_ONLY);
@@ -34,6 +35,7 @@ public class WriteCheckList {
                     checklistPanel.add(new Checkbox(newItem));
                     
                     writeFile(textArea.getText());
+					callback.run();
                 }
             }
         });
@@ -48,21 +50,41 @@ public class WriteCheckList {
         writeCheckList.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent e) {
             	writeCheckList.dispose();
+
             }
         });
 
         writeCheckList.setVisible(true);
+
 	}
 	public void writeFile(String text) {
-		String path = CheckInfo.getFolderPath()+"/"+NowLoginUser.getID();
-		File folder = new File(path);
-		try(FileWriter fw = new FileWriter(path+"/schedule", true)){
-			
+		String path = CheckInfo.getFolderPath()+"/"+NowLoginUser.getID()+"/schedule";
+
+
+		String schaPath = path+"/"+UpdateCalendar.getCurrentYear()+"_"+UpdateCalendar.getCurrentMonth()+"_"+UpdateCalendar.getCurrentDay()+".txt";
+		try(FileWriter fw = new FileWriter(schaPath, true)){
+			fw.write(text+"\n");
+			herePopUp("추가를 완료 했습니다!");
+			writeCheckList.dispose();
+
 		}catch(IOException e){
-			System.out.println("업로드 실패");
+			System.out.println("업로드 실패 "+e);
 		}
 		
 	    
 
+	}
+	public void herePopUp(String here){
+		Frame frame = new Frame();
+		frame.setSize(200, 100);
+		frame.setLayout(new FlowLayout());
+		frame.setVisible(true);
+		Label l = new Label(here) ;
+		frame.add(l);
+		frame.addWindowListener(new WindowAdapter() {
+			public void windowClosing(WindowEvent e) {
+				frame.dispose();
+			}
+		});
 	}
 }

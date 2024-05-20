@@ -9,7 +9,7 @@ public class CheckInfo {
 	private boolean isIDtrue = false;
 	private boolean Allclear = false;
 	private static String folderPath = "C:\\schedule_system\\User";
-	private static String fileIDPath = folderPath+"\\UserID.txt";
+	private String fileIDPath = folderPath+"\\UserID.txt";
 	private String filePWPath = folderPath+"\\UserPW.txt";
 	private File folder = new File(folderPath);
 	CheckInfo(){}

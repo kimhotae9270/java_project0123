@@ -5,9 +5,9 @@ import java.time.LocalDate;
 import listCheck.LoadList;
 
 public class UpdateCalendar extends Frame {
-    private int currentYear;
-    private int currentMonth;
-
+    private static int currentYear;
+    private static int currentMonth;
+    private static int currentDay;
     private Label monthLabel;
     private Panel calendarPanel;
 
@@ -15,7 +15,7 @@ public class UpdateCalendar extends Frame {
         currentYear = LocalDate.now().getYear();
         currentMonth = LocalDate.now().getMonthValue();
 
-        setTitle("이번 달 달력");
+        setTitle(currentYear+"년 "+currentMonth+"월");
         setSize(300, 300);
         setLayout(new BorderLayout());
 
@@ -90,12 +90,13 @@ public class UpdateCalendar extends Frame {
 
         int daysInMonth = firstDayOfMonth.lengthOfMonth();
         for (int day = 1; day <= daysInMonth; day++) {
-            final int finalDay = day; // final 변수로 복사
-            Button button = new Button(String.valueOf(finalDay));
+            final int finalday = day;
+            Button button = new Button(String.valueOf(finalday));
             button.addActionListener(new ActionListener() {
                 public void actionPerformed(ActionEvent e) {
+                    currentDay = finalday;
                     // 버튼 클릭 시 다음 화면으로 이동하는 동작 추가
-                    new LoadList(currentMonth, finalDay);
+                    new LoadList();
                 }
             });
             calendarPanel.add(button);
@@ -108,5 +109,15 @@ public class UpdateCalendar extends Frame {
         setVisible(true);
     }
     
-    
+
+
+    public static int getCurrentYear() {
+        return currentYear;
+    }
+    public static int getCurrentMonth(){
+        return currentMonth;
+    }
+    public static int getCurrentDay(){
+        return currentDay;
+    }
 }
