@@ -38,6 +38,7 @@ public class UpdateCalendar extends Frame {
                 } else {
                     currentMonth--;
                 }
+                setTitle(currentYear+"년 "+currentMonth+"월");
                 updateMonthLabel();
                 updateCalendarPanel();
             }
@@ -53,6 +54,7 @@ public class UpdateCalendar extends Frame {
                 } else {
                     currentMonth++;
                 }
+                setTitle(currentYear+"년 "+currentMonth+"월");
                 updateMonthLabel();
                 updateCalendarPanel();
             }

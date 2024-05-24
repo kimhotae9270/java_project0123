@@ -19,8 +19,7 @@ public class WriteCheckList implements PopUp {
 	Frame writeCheckList = new Frame("할일 추가하기");
 	Panel checklistPanel;
 	Button addButton;
-	int month;
-	int year;
+
 	public WriteCheckList(Runnable callback) {
 		writeCheckList.setSize(500,150);
 		writeCheckList.setLayout(new BorderLayout());
@@ -58,12 +57,19 @@ public class WriteCheckList implements PopUp {
 
 	}
 	public void writeFile(String text) {
-		String path = CheckInfo.getFolderPath()+"/"+NowLoginUser.getID()+"/schedule";
+		String path = CheckInfo.getFolderPath()+"/"+NowLoginUser.getID()+"/schedule"+"/"+UpdateCalendar.getCurrentYear()+"/"+UpdateCalendar.getCurrentMonth();
+		File folder = new File(path);
+		if(!folder.exists()){
+			folder.mkdirs();
+		}
 
-
-		String schaPath = path+"/"+UpdateCalendar.getCurrentYear()+"_"+UpdateCalendar.getCurrentMonth()+"_"+UpdateCalendar.getCurrentDay()+".txt";
+		String schaPath = path+"/"+UpdateCalendar.getCurrentDay()+".txt";
 		try(FileWriter fw = new FileWriter(schaPath, true)){
-			fw.write(text+"\n");
+			String[] texts = text.split("\n");
+			for(int i = 0;i<texts.length;i++){
+				fw.write("0;"+texts[i]);
+			}
+
 			herePopUp("추가를 완료 했습니다!");
 			writeCheckList.dispose();
 
